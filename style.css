@@ -65,3 +65,21 @@ button {
 button:hover {
   background: white;
 }
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 50px;
+  margin: 0;
+}
+
+.hero p {
+  color: #aaa;
+  margin-top: 10px;
+}
