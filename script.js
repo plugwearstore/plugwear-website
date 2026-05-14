@@ -1,3 +1,4 @@
+const auth = firebase.auth();
 let cart = [];
 
 function addToCart(product){
