@@ -1,9 +1,14 @@
+/* GENERAL */
 body{
   margin:0;
   padding:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#0f0f0f;
-  color:white;
+  color:#fff;
+}
+
+h1,h2,h3{
+  margin:10px 0;
 }
 
 a{
@@ -11,55 +16,60 @@ a{
   text-decoration:none;
 }
 
-h1,h2,h3,h4{
-  margin-bottom:15px;
-}
-
+/* CONTAINERS */
 .checkout-box,
-.admin-box,
-#loginBox{
-  width:350px;
-  margin:50px auto;
+#loginBox,
+.dashboard{
+  width:360px;
+  margin:40px auto;
   background:#1a1a1a;
-  padding:25px;
-  border-radius:15px;
+  padding:20px;
+  border-radius:12px;
 }
 
+/* INPUTS */
 input,
 select{
   width:100%;
-  padding:12px;
-  margin:10px 0;
+  padding:10px;
+  margin:8px 0;
   border:none;
   border-radius:8px;
   background:#2a2a2a;
   color:white;
 }
 
+/* BUTTONS */
 button{
   width:100%;
-  padding:12px;
+  padding:10px;
   margin-top:10px;
   border:none;
   border-radius:8px;
-  background:white;
-  color:black;
+  background:#fff;
+  color:#000;
   font-weight:bold;
   cursor:pointer;
 }
 
 button:hover{
-  opacity:0.8;
+  opacity:0.85;
+}
+
+/* PRODUCTS */
+#products{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  padding:20px;
 }
 
 .card{
-  width:250px;
-  background:#1a1a1a;
-  padding:15px;
-  border-radius:15px;
-  margin:15px;
-  display:inline-block;
-  vertical-align:top;
+  width:220px;
+  background:#1c1c1c;
+  margin:10px;
+  padding:12px;
+  border-radius:12px;
   text-align:center;
 }
 
@@ -68,44 +78,47 @@ button:hover{
   border-radius:10px;
 }
 
+/* CART / ORDERS */
 .order-card{
   background:#222;
-  padding:15px;
+  padding:12px;
   margin:10px 0;
   border-radius:10px;
 }
 
-.order-card button{
-  background:red;
-  color:white;
-  border:none;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
-  margin-top:10px;
-}
-
+/* ADMIN DASHBOARD */
 .dashboard{
+  margin-bottom:15px;
   background:#111;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:20px;
 }
 
+/* CRYPTO BOX */
 #cryptoInfo{
   background:#111;
   padding:15px;
+  margin-top:15px;
   border-radius:10px;
-  margin-top:20px;
 }
 
+/* WALLET TEXT */
 #wallet{
   word-break:break-all;
 }
 
-#products{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  padding:20px;
+/* ADMIN LOGIN BOX */
+#loginBox{
+  text-align:center;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .card{
+    width:90%;
+  }
+
+  .checkout-box,
+  #loginBox,
+  .dashboard{
+    width:90%;
+  }
 }
