@@ -382,3 +382,14 @@ footer p{
   border-radius:6px;
   cursor:pointer;
 }
+#cryptoInfo{
+  background:#111;
+  color:white;
+  padding:20px;
+  border-radius:10px;
+  margin-top:20px;
+}
+
+#wallet{
+  word-break:break-all;
+}
