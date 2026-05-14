@@ -118,3 +118,8 @@ function goCheckout(){
 
 </body>
 </html>
+function removeItem(id){
+
+  db.collection("carts").doc(id).delete();
+
+}
