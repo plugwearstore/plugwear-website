@@ -31,5 +31,36 @@ document.querySelector(".checkout").onclick = function(){
   window.location.href = "checkout.html";
 }
   alert("Welcome to PLUGWEAR");
+  
 
 }
+function loadProducts(){
+
+  const container = document.getElementById("products");
+
+  db.collection("products").onSnapshot(snapshot => {
+
+    container.innerHTML = "";
+
+    snapshot.forEach(doc => {
+
+      let p = doc.data();
+
+      container.innerHTML += `
+        <div class="card">
+          <img src="${p.image}" />
+          <h2>${p.name}</h2>
+          <p>${p.price}€</p>
+          <button onclick="addToCart('${p.name}')">
+            Add To Cart
+          </button>
+        </div>
+      `;
+
+    });
+
+  });
+
+}
+
+loadProducts();
