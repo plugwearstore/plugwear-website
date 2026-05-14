@@ -57,7 +57,18 @@ function login(){
     .catch(err => alert(err.message));
 }
 
-function loadOrders(){
+function loadOrders(){container.innerHTML += `
+  <div class="order-card">
+    <p><b>Emri:</b> ${o.name}</p>
+    <p><b>Adresa:</b> ${o.address}</p>
+    <p><b>Qyteti:</b> ${o.city}</p>
+
+    <p><b>Status:</b> ${o.status}</p>
+
+    <button onclick="updateStatus('${doc.id}', 'shipped')">Shipped</button>
+    <button onclick="updateStatus('${doc.id}', 'delivered')">Delivered</button>
+  </div>
+`;
 
   const container = document.getElementById("orders");
 
