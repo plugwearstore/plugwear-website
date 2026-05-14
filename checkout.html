@@ -27,7 +27,7 @@
     <option value="cod">Cash on Delivery</option>
     <option value="crypto">Crypto (USDT / BTC)</option>
   </select>
-
+j
   <button onclick="placeOrder()">Place Order</button>
 
 <div id="cryptoInfo">
@@ -68,13 +68,21 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-function placeOrder(){
+db.collection("orders").add({
 
-  let inputs = document.querySelectorAll("input");
+  name: name,
+  address: address,
+  city: city,
 
-  let name = inputs[0].value;
-  let address = inputs[1].value;
-  let city = inputs[2].value;
+  payment: document.getElementById("paymentMethod").value,
+
+  proof: document.getElementById("paymentProof").value,
+
+  status: "pending",
+
+  time: Date.now()
+
+});
 
   db.collection("orders").add({
     name: name,
