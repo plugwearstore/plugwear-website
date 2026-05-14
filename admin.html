@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
   <meta charset="UTF-8">
-  <title>Admin - PLUGWEAR</title>
+  <title>Admin Porositë - PLUGWEAR</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="admin-box">
 
-  <h1>ORDERS PANEL 🔥</h1>
+  <h1>🔥 POROSITË PLUGWEAR</h1>
 
   <div id="orders"></div>
 
@@ -40,22 +40,20 @@ function loadOrders(){
     container.innerHTML = "";
 
     snapshot.forEach(doc => {
-
-      let o = doc.data();
+      const o = doc.data();
 
       container.innerHTML += `
         <div class="order-card">
-          <p><b>Name:</b> ${o.name}</p>
-          <p><b>Address:</b> ${o.address}</p>
-          <p><b>City:</b> ${o.city}</p>
-          <hr>
+          <p><b>Emri:</b> ${o.name || "-"}</p>
+          <p><b>Adresa:</b> ${o.address || "-"}</p>
+          <p><b>Qyteti:</b> ${o.city || "-"}</p>
+          <p><b>Pagesa:</b> ${o.payment || "N/A"}</p>
+          <p><b>Koha:</b> ${new Date(o.time).toLocaleString()}</p>
         </div>
       `;
-
     });
 
   });
-
 }
 
 loadOrders();
