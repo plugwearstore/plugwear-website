@@ -48,14 +48,23 @@ auth.onAuthStateChanged(user => {
 
       container.innerHTML = "";
 
-      snapshot.forEach(doc => {
+      let total = 0;
 
-        let c = doc.data();
+snapshot.forEach(doc => {
 
-        container.innerHTML += `
-          <div class="order-card">
-            <p>🛍 ${c.product}</p>
-          </div>
+  let c = doc.data();
+
+  total += c.price || 0;
+
+  container.innerHTML += `
+    <div class="order-card">
+      <p>🛍 ${c.product}</p>
+      <p>💰 ${c.price}€</p>
+    </div>
+  `;
+});
+
+document.getElementById("totalPrice").innerText = "Total: " + total + "€";
         `;
 
       });
