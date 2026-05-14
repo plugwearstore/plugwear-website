@@ -74,7 +74,9 @@ function loadProducts(){
 }
 
 loadProducts();
-
+<button onclick="addToCart('${p.name}', ${p.price})">
+  Add to Cart
+</button>
 // -------------------- CART --------------------
 
 function addToCart(product, price){
