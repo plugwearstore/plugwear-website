@@ -138,3 +138,43 @@ footer p{
   }
 
 }
+.cart-icon{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:white;
+  color:black;
+  padding:10px 15px;
+  border-radius:30px;
+  cursor:pointer;
+  z-index:1000;
+  font-weight:bold;
+}
+
+.cart{
+  position:fixed;
+  top:0;
+  right:-400px;
+  width:350px;
+  height:100vh;
+  background:#111;
+  padding:30px;
+  transition:0.4s;
+  z-index:999;
+}
+
+.cart.active{
+  right:0;
+}
+
+.cart h2{
+  margin-bottom:20px;
+}
+
+#cart-items{
+  margin-bottom:20px;
+}
+
+.checkout{
+  width:100%;
+}
