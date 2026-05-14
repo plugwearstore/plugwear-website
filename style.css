@@ -354,3 +354,16 @@ footer p{
   margin:10px 0;
   border-radius:10px;
 }
+.order-card button{
+  margin:5px;
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  background:#222;
+  color:white;
+}
+
+.order-card button:hover{
+  background:#444;
+}
