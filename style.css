@@ -1,379 +1,80 @@
-*{
+body{
   margin:0;
   padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
-
-body{
+  font-family:Arial;
   background:#0f0f0f;
   color:white;
 }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:25px 10%;
-  position:fixed;
-  width:100%;
-  top:0;
-  background:black;
-}
-
-.logo{
-  font-size:28px;
-  font-weight:bold;
-  letter-spacing:3px;
-}
-
-nav a{
+a{
   color:white;
   text-decoration:none;
-  margin-left:25px;
-  font-size:15px;
 }
 
-.hero{
-  height:100vh;
-  background:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1400&auto=format&fit=crop') center/cover;
-  display:flex;
-  align-items:center;
-  padding:0 10%;
+h1,h2,h3,h4{
+  margin-bottom:15px;
 }
 
-.hero-text{
-  max-width:500px;
+.checkout-box,
+.admin-box,
+#loginBox{
+  width:350px;
+  margin:50px auto;
+  background:#1a1a1a;
+  padding:25px;
+  border-radius:15px;
 }
 
-.hero h1{
-  font-size:70px;
-  margin-bottom:20px;
-}
-
-.hero p{
-  font-size:18px;
-  margin-bottom:30px;
+input,
+select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+  background:#2a2a2a;
+  color:white;
 }
 
 button{
-  padding:15px 35px;
+  width:100%;
+  padding:12px;
+  margin-top:10px;
   border:none;
+  border-radius:8px;
   background:white;
   color:black;
   font-weight:bold;
   cursor:pointer;
 }
 
-.products{
-  padding:100px 10%;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
+button:hover{
+  opacity:0.8;
 }
 
 .card{
-  background:#1b1b1b;
+  width:250px;
+  background:#1a1a1a;
+  padding:15px;
   border-radius:15px;
-  overflow:hidden;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-10px);
+  margin:15px;
+  display:inline-block;
+  vertical-align:top;
+  text-align:center;
 }
 
 .card img{
   width:100%;
-  height:350px;
-  object-fit:cover;
-}
-
-.card h2{
-  padding:20px 20px 10px;
-}
-
-.card p{
-  padding:0 20px 20px;
-  color:#aaa;
-}
-  .card button{
-  margin:20px;
-  width:calc(100% - 40px);
-}
-
-.banner{
-  height:300px;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.banner h1{
-  font-size:50px;
-  letter-spacing:5px;
-}
-
-footer{
-  padding:60px 10%;
-  text-align:center;
-  background:#080808;
-}
-
-footer p{
-  color:#777;
-  margin-top:10px;
-}
-
-@media(max-width:768px){
-
-  .hero h1{
-    font-size:45px;
-  }
-
-  nav{
-    display:none;
-  }
-
-}
-.cart-icon{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:white;
-  color:black;
-  padding:10px 15px;
-  border-radius:30px;
-  cursor:pointer;
-  z-index:1000;
-  font-weight:bold;
-}
-
-.cart{
-  position:fixed;
-  top:0;
-  right:-400px;
-  width:350px;
-  height:100vh;
-  background:#111;
-  padding:30px;
-  transition:0.4s;
-  z-index:999;
-}
-
-.cart.active{
-  right:0;
-}
-
-.cart h2{
-  margin-bottom:20px;
-}
-
-#cart-items{
-  margin-bottom:20px;
-}
-
-.checkout{
-  width:100%;
-}
-.auth-buttons{
-  position:fixed;
-  top:20px;
-  left:20px;
-  z-index:1000;
-}
-
-.auth-buttons button{
-  padding:10px 20px;
-}
-
-.login-box{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  width:320px;
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  transition:0.3s;
-  z-index:2000;
-}
-
-.login-box.active{
-  transform:translate(-50%,-50%) scale(1);
-}
-
-.login-box h2{
-  margin-bottom:20px;
-  text-align:center;
-}
-
-.login-box input{
-  width:100%;
-  padding:15px;
-  margin-bottom:15px;
-  background:#1d1d1d;
-  border:none;
-  color:white;
-}
-
-.login-box button{
-  width:100%;
-}
-.about{
-  padding:120px 10%;
-  background:#141414;
-  text-align:center;
-}
-
-.about h1{
-  font-size:50px;
-  margin-bottom:25px;
-}
-
-.about p{
-  max-width:700px;
-  margin:auto;
-  color:#aaa;
-  line-height:1.8;
-  margin-bottom:30px;
-}
-
-.instagram{
-  padding:100px 10%;
-}
-
-.instagram h1{
-  text-align:center;
-  margin-bottom:50px;
-  font-size:45px;
-}
-
-.insta-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.insta-grid img{
-  width:100%;
-  height:350px;
-  object-fit:cover;
-  border-radius:15px;
-  transition:0.3s;
-}
-
-.insta-grid img:hover{
-  transform:scale(1.05);
-}
-.checkout-box{
-  width:350px;
-  margin:100px auto;
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-}
-
-.checkout-box input{
-  width:100%;
-  padding:15px;
-  margin:10px 0;
-  background:#1d1d1d;
-  border:none;
-  color:white;
-}
-
-.checkout-box button{
-  width:100%;
-  padding:15px;
-}
-.hidden{
-  display:none;
-}
-
-.checkout-box h3{
-  margin-top:20px;
-}
-
-.checkout-box button{
-  margin:10px 0;
-}
-.admin-box{
-  width:400px;
-  margin:100px auto;
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-}
-
-.admin-box input{
-  width:100%;
-  padding:15px;
-  margin:10px 0;
-  background:#1d1d1d;
-  border:none;
-  color:white;
-}
-
-.admin-box button{
-  width:100%;
-  padding:15px;
-}
-.admin-box{
-  width:500px;
-  margin:80px auto;
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  color:white;
+  border-radius:10px;
 }
 
 .order-card{
-  background:#1d1d1d;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
-}
-.admin-box{
-  width:500px;
-  margin:80px auto;
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  color:white;
-}
-
-.order-card{
-  background:#1d1d1d;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
-}
-.order-card button{
-  margin:5px;
-  padding:5px 10px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
   background:#222;
-  color:white;
-}
-
-.order-card button:hover{
-  background:#444;
-}
-.dashboard{
-  background:#111;
-  color:white;
   padding:15px;
-  margin-bottom:20px;
+  margin:10px 0;
   border-radius:10px;
 }
+
 .order-card button{
   background:red;
   color:white;
@@ -381,15 +82,30 @@ footer p{
   padding:8px 12px;
   border-radius:6px;
   cursor:pointer;
+  margin-top:10px;
 }
+
+.dashboard{
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
 #cryptoInfo{
   background:#111;
-  color:white;
-  padding:20px;
+  padding:15px;
   border-radius:10px;
   margin-top:20px;
 }
 
 #wallet{
   word-break:break-all;
+}
+
+#products{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  padding:20px;
 }
