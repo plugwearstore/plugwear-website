@@ -20,3 +20,14 @@ function openCart(){
   document.getElementById("cart").classList.toggle("active");
 
 }
+function openLogin(){
+
+  document.getElementById("loginBox").classList.toggle("active");
+
+}
+
+function login(){
+
+  alert("Welcome to PLUGWEAR");
+
+}
