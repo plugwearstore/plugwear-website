@@ -374,3 +374,11 @@ footer p{
   margin-bottom:20px;
   border-radius:10px;
 }
+.order-card button{
+  background:red;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
