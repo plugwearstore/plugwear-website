@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Admin - PLUGWEAR</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="loginBox">
-
   <h2>Admin Login</h2>
-
-  <input id="email" type="text" placeholder="Email">
+  <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-
   <button onclick="login()">Login</button>
-
 </div>
 
 <div id="adminPanel" style="display:none;">
 
+  <!-- PRODUCTS -->
   <div class="dashboard">
-    <h2>📊 Dashboard</h2>
-
-    <p id="totalOrders">Total Orders: 0</p>
-
-    <p id="totalRevenue">Total Revenue: 0€</p>
+    <h2>🛍 Add Product</h2>
+    <input id="pName" placeholder="Name">
+    <input id="pPrice" type="number" placeholder="Price">
+    <input id="pImage" placeholder="Image URL">
+    <button onclick="addProduct()">Add</button>
   </div>
 
-  <h1>🔥 Orders</h1>
+  <!-- DASHBOARD -->
+  <div class="dashboard">
+    <h2>📊 Dashboard</h2>
+    <p id="totalOrders">0</p>
+    <p id="totalRevenue">0€</p>
+  </div>
 
+  <h2>🔥 Orders</h2>
   <div id="orders"></div>
 
 </div>
@@ -39,106 +41,77 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBRy6pd2rzftMLcLUUOTv0P3f9YBdqQvBA",
-  authDomain: "plugwear-17ffc.firebaseapp.com",
-  projectId: "plugwear-17ffc",
-  storageBucket: "plugwear-17ffc.firebasestorage.app",
-  messagingSenderId: "42517755726",
-  appId: "1:42517755726:web:8ac214acbdb379d766d01f"
-};
-
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp({
+  apiKey:"AIzaSyBRy6pd2rzftMLcLUUOTv0P3f9YBdqQvBA",
+  authDomain:"plugwear-17ffc.firebaseapp.com",
+  projectId:"plugwear-17ffc",
+  storageBucket:"plugwear-17ffc.firebasestorage.app",
+  messagingSenderId:"42517755726",
+  appId:"1:42517755726:web:8ac214acbdb379d766d01f"
+});
 
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// LOGIN
 function login(){
-
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("adminPanel").style.display = "block";
-
-      loadOrders();
-
-    })
-    .catch(err => alert(err.message));
+  auth.signInWithEmailAndPassword(
+    email.value,
+    password.value
+  ).then(()=>{
+    loginBox.style.display="none";
+    adminPanel.style.display="block";
+    loadOrders();
+  }).catch(e=>alert(e.message));
 }
 
+// ADD PRODUCT
+function addProduct(){
+  db.collection("products").add({
+    name:pName.value,
+    price:Number(pPrice.value),
+    image:pImage.value
+  });
+  alert("Product added");
+}
+
+// ORDERS + REVENUE
 function loadOrders(){
 
-  const container = document.getElementById("orders");
+  db.collection("orders").onSnapshot(snap=>{
 
-  const totalText = document.getElementById("totalOrders");
+    orders.innerHTML="";
 
-  const revenueText = document.getElementById("totalRevenue");
+    let count=0;
+    let revenue=0;
 
-  db.collection("orders").onSnapshot(snapshot => {
-
-    container.innerHTML = "";
-
-    let count = 0;
-    let revenue = 0;
-
-    snapshot.forEach(doc => {
-
+    snap.forEach(doc=>{
       count++;
-
-      let o = doc.data();
-
+      let o=doc.data();
       revenue += o.price || 0;
 
-      container.innerHTML += `
+      orders.innerHTML += `
         <div class="order-card">
+          <p>${o.name}</p>
+          <p>${o.address}</p>
+          <p>${o.payment}</p>
+          <p>${o.status}</p>
 
-          <p><b>Name:</b> ${o.name}</p>
-          <p><b>Address:</b> ${o.address}</p>
-          <p><b>City:</b> ${o.city}</p>
+          <a href="${o.proof}" target="_blank">Proof</a>
 
-          <p><b>Payment:</b> ${o.payment}</p>
-
-          <p><b>Status:</b> ${o.status}</p>
-
-          <p><b>Revenue:</b> ${o.price}€</p>
-
-          <p>
-            <a href="${o.proof}" target="_blank">
-              View Payment Proof
-            </a>
-          </p>
-
-          <button onclick="updateStatus('${doc.id}','shipped')">
-            Shipped
-          </button>
-
-          <button onclick="updateStatus('${doc.id}','delivered')">
-            Delivered
-          </button>
-
+          <button onclick="updateStatus('${doc.id}','shipped')">Ship</button>
+          <button onclick="updateStatus('${doc.id}','delivered')">Done</button>
         </div>
       `;
-
     });
 
-    totalText.innerText = "Total Orders: " + count;
-
-    revenueText.innerText = "Total Revenue: " + revenue + "€";
-
+    totalOrders.innerText="Orders: "+count;
+    totalRevenue.innerText="Revenue: "+revenue+"€";
   });
-
 }
 
-function updateStatus(id, status){
-
-  db.collection("orders").doc(id).update({
-    status: status
-  });
-
+function updateStatus(id,status){
+  db.collection("orders").doc(id).update({status});
 }
 </script>
 
