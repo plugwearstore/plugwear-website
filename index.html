@@ -6,7 +6,22 @@
   <title>PLUGWEAR</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<div class="auth-buttons">
+  <button onclick="openLogin()">Login</button>
+</div>
+
+<div class="login-box" id="loginBox">
+
+  <h2>PLUGWEAR ACCOUNT</h2>
+
+  <input type="text" placeholder="Username">
+
+  <input type="password" placeholder="Password">
+
+  <button onclick="login()">LOGIN</button>
+
+</div>
+  <body>
   <div class="cart-icon" onclick="openCart()">
   🛒 <span id="cart-count">0</span>
 </div>
