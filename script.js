@@ -27,7 +27,9 @@ function openLogin(){
 }
 
 function login(){
-
+document.querySelector(".checkout").onclick = function(){
+  window.location.href = "checkout.html";
+}
   alert("Welcome to PLUGWEAR");
 
 }
