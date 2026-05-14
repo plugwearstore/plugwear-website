@@ -14,15 +14,44 @@
   <input type="text" placeholder="Full Name">
   <input type="text" placeholder="Address">
   <input type="text" placeholder="City">
-  <input type="text" placeholder="Card Number">
+
+  <h3>Payment Method</h3>
+
+  <button onclick="selectPayment('crypto')">Pay with Crypto</button>
+  <button onclick="selectPayment('cash')">Cash on Delivery</button>
+
+  <div id="cryptoBox" class="hidden">
+    <p>Send USDT (TRC20) to:</p>
+    <p><b>TX9a8ExampleWallet123</b></p>
+  </div>
 
   <button onclick="placeOrder()">PLACE ORDER</button>
 
 </div>
 
 <script>
+let paymentMethod = "";
+
+function selectPayment(type){
+  paymentMethod = type;
+
+  document.getElementById("cryptoBox").style.display =
+    type === "crypto" ? "block" : "none";
+
+  alert("Selected: " + type);
+}
+
 function placeOrder(){
-  alert("Order placed successfully!");
+  if(paymentMethod === ""){
+    alert("Please select payment method");
+    return;
+  }
+
+  if(paymentMethod === "crypto"){
+    alert("Order created. Wait for crypto payment confirmation.");
+  } else {
+    alert("Order placed. Pay cash on delivery.");
+  }
 }
 </script>
 
