@@ -58,24 +58,37 @@ function login(){
       document.getElementById("loginBox").style.display = "none";
       document.getElementById("adminPanel").style.display = "block";
 
-      loadOrders();
+      function loadOrders(){
 
-    })
-    .catch(err => alert(err.message));
+  const container = document.getElementById("orders");
+  const totalText = document.getElementById("totalOrders");
+
+  db.collection("orders").onSnapshot(snapshot => {
+
+    container.innerHTML = "";
+
+    let count = 0;
+
+    snapshot.forEach(doc => {
+      count++;
+
+      let o = doc.data();
+
+      container.innerHTML += `
+        <div class="order-card">
+          <p><b>Emri:</b> ${o.name}</p>
+          <p><b>Adresa:</b> ${o.address}</p>
+          <p><b>Qyteti:</b> ${o.city}</p>
+          <p><b>Payment:</b> ${o.payment}</p>
+          <p><b>Status:</b> ${o.status}</p>
+        </div>
+      `;
+    });
+
+    totalText.innerText = "Total Orders: " + count;
+
+  });
 }
-
-function loadOrders(){container.innerHTML += `
-  <div class="order-card">
-    <p><b>Emri:</b> ${o.name}</p>
-    <p><b>Adresa:</b> ${o.address}</p>
-    <p><b>Qyteti:</b> ${o.city}</p>
-
-    <p><b>Status:</b> ${o.status}</p>
-
-    <button onclick="updateStatus('${doc.id}', 'shipped')">Shipped</button>
-    <button onclick="updateStatus('${doc.id}', 'delivered')">Delivered</button>
-  </div>
-`;
 
   const container = document.getElementById("orders");
 
