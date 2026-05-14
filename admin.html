@@ -1,11 +1,65 @@
-.hidden{
-  display:none;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - PLUGWEAR</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-box">
+
+  <h1>ORDERS PANEL 🔥</h1>
+
+  <div id="orders"></div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBRy6pd2rzftMLcLUUOTv0P3f9YBdqQvBA",
+  authDomain: "plugwear-17ffc.firebaseapp.com",
+  projectId: "plugwear-17ffc",
+  storageBucket: "plugwear-17ffc.firebasestorage.app",
+  messagingSenderId: "42517755726",
+  appId: "1:42517755726:web:8ac214acbdb379d766d01f"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function loadOrders(){
+
+  const container = document.getElementById("orders");
+
+  db.collection("orders").onSnapshot(snapshot => {
+
+    container.innerHTML = "";
+
+    snapshot.forEach(doc => {
+
+      let o = doc.data();
+
+      container.innerHTML += `
+        <div class="order-card">
+          <p><b>Name:</b> ${o.name}</p>
+          <p><b>Address:</b> ${o.address}</p>
+          <p><b>City:</b> ${o.city}</p>
+          <hr>
+        </div>
+      `;
+
+    });
+
+  });
+
 }
 
-.checkout-box h3{
-  margin-top:20px;
-}
+loadOrders();
+</script>
 
-.checkout-box button{
-  margin:10px 0;
-}
+</body>
+</html>
