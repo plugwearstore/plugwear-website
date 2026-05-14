@@ -74,3 +74,17 @@ loadOrders();
 
 </body>
 </html>
+function adminLogin(){
+
+  let email = document.getElementById("adminEmail").value;
+  let pass = document.getElementById("adminPass").value;
+
+  if(email === "admin@plugwear.com" && pass === "123456"){
+
+    document.getElementById("loginAdmin").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+
+  } else {
+    alert("Wrong credentials ❌");
+  }
+}
