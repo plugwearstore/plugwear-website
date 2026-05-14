@@ -27,3 +27,4 @@ function logout(){
   auth.signOut();
   alert("Logged out");
 }
+const auth = firebase.auth();
