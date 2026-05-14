@@ -58,8 +58,7 @@ function login(){
 
       document.getElementById("loginBox").style.display = "none";
       document.getElementById("adminPanel").style.display = "block";
-
-      function loadOrders(){
+function loadOrders(){
 
   const container = document.getElementById("orders");
   const totalText = document.getElementById("totalOrders");
@@ -83,6 +82,7 @@ function login(){
           <p><b>Payment:</b> ${o.payment}</p>
           <p><b>Status:</b> ${o.status}</p>
         </div>
+      
       `;
     });
 
