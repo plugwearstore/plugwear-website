@@ -1,1 +1,3 @@
-console.log("PLUGWEAR LOADED");
+function addToCart(product){
+  alert(product + " added to cart");
+}
