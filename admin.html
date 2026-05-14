@@ -8,23 +8,28 @@
 <body>
 
 <div id="loginBox">
+
   <h2>Admin Login</h2>
 
   <input id="email" type="text" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
 
   <button onclick="login()">Login</button>
+
 </div>
 
 <div id="adminPanel" style="display:none;">
 
   <div class="dashboard">
-  <h2>📊 Dashboard</h2>
-  <p id="totalOrders">Total Orders: 0</p>
-  <p id="totalRevenue">Total Revenue: 0€</p>
-</div>
+    <h2>📊 Dashboard</h2>
 
-  <h1>🔥 POROSITË</h1>
+    <p id="totalOrders">Total Orders: 0</p>
+
+    <p id="totalRevenue">Total Revenue: 0€</p>
+  </div>
+
+  <h1>🔥 Orders</h1>
+
   <div id="orders"></div>
 
 </div>
@@ -34,87 +39,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBRy6pd2rzftMLcLUUOTv0P3f9YBdqQvBA",
-  authDomain: "plugwear-17ffc.firebaseapp.com",
-  projectId: "plugwear-17ffc",
-  storageBucket: "plugwear-17ffc.firebasestorage.app",
-  messagingSenderId: "42517755726",
-  appId: "1:42517755726:web:8ac214acbdb379d766d01f"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-function login(){
-
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("adminPanel").style.display = "block";
-function loadOrders(){
-
-  const container = document.getElementById("orders");
-  const totalText = document.getElementById("totalOrders");
-
-  db.collection("orders").onSnapshot(snapshot => {
-
-    container.innerHTML = "";
-
-    let count = 0;
-
-    snapshot.forEach(doc => {
-      count++;
-
-      let o = doc.data();
-
-      container.innerHTML += `
-        <div class="order-card">
-          <p><b>Emri:</b> ${o.name}</p>
-          <p><b>Adresa:</b> ${o.address}</p>
-          <p><b>Qyteti:</b> ${o.city}</p>
-          <p><b>Payment:</b> ${o.payment}</p>
-          <p><b>Status:</b> ${o.status}</p>
-        </div>
-      
-      `;
-    });
-
-    totalText.innerText = "Total Orders: " + count;
-
-  });
-}
-
-  const container = document.getElementById("orders");
-
-  db.collection("orders").onSnapshot(snapshot => {
-
-    container.innerHTML = "";
-
-    snapshot.forEach(doc => {
-
-      let o = doc.data();
-
-      container.innerHTML += `
-        <div class="order-card">
-          <p><b>Emri:</b> ${o.name}</p>
-          <p><b>Adresa:</b> ${o.address}</p>
-          <p><b>Qyteti:</b> ${o.city}</p>
-        </div>
-      `;
-
-    });
-
-  });
-
-}
-</script>
 const firebaseConfig = {
   apiKey: "AIzaSyBRy6pd2rzftMLcLUUOTv0P3f9YBdqQvBA",
   authDomain: "plugwear-17ffc.firebaseapp.com",
@@ -150,34 +74,73 @@ function loadOrders(){
 
   const container = document.getElementById("orders");
 
+  const totalText = document.getElementById("totalOrders");
+
+  const revenueText = document.getElementById("totalRevenue");
+
   db.collection("orders").onSnapshot(snapshot => {
 
     container.innerHTML = "";
 
+    let count = 0;
+    let revenue = 0;
+
     snapshot.forEach(doc => {
+
+      count++;
 
       let o = doc.data();
 
+      revenue += o.price || 0;
+
       container.innerHTML += `
         <div class="order-card">
-          <p><b>Emri:</b> ${o.name}</p>
-          <p><b>Adresa:</b> ${o.address}</p>
-          <p><b>Qyteti:</b> ${o.city}</p>
+
+          <p><b>Name:</b> ${o.name}</p>
+          <p><b>Address:</b> ${o.address}</p>
+          <p><b>City:</b> ${o.city}</p>
+
+          <p><b>Payment:</b> ${o.payment}</p>
+
+          <p><b>Status:</b> ${o.status}</p>
+
+          <p><b>Revenue:</b> ${o.price}€</p>
+
+          <p>
+            <a href="${o.proof}" target="_blank">
+              View Payment Proof
+            </a>
+          </p>
+
+          <button onclick="updateStatus('${doc.id}','shipped')">
+            Shipped
+          </button>
+
+          <button onclick="updateStatus('${doc.id}','delivered')">
+            Delivered
+          </button>
+
         </div>
       `;
 
     });
 
+    totalText.innerText = "Total Orders: " + count;
+
+    revenueText.innerText = "Total Revenue: " + revenue + "€";
+
   });
 
 }
+
+function updateStatus(id, status){
+
+  db.collection("orders").doc(id).update({
+    status: status
+  });
+
+}
+</script>
+
 </body>
 </html>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-function updateStatus(id, newStatus){
-  db.collection("orders").doc(id).update({
-    status: newStatus
-  });
-}
