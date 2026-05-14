@@ -302,3 +302,25 @@ footer p{
 .checkout-box button{
   margin:10px 0;
 }
+.admin-box{
+  width:400px;
+  margin:100px auto;
+  background:#111;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.admin-box input{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  background:#1d1d1d;
+  border:none;
+  color:white;
+}
+
+.admin-box button{
+  width:100%;
+  padding:15px;
+}
