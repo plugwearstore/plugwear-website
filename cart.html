@@ -74,7 +74,38 @@ document.getElementById("totalPrice").innerText = "Total: " + total + "€";
 });
 
 function goCheckout(){
-  window.location.href = "checkout.html";
+
+  const user = auth.currentUser;
+
+  db.collection("carts")
+    .where("userId", "==", user.uid)
+    .get()
+    .then(snapshot => {
+
+      let items = [];
+      let total = 0;
+
+      snapshot.forEach(doc => {
+        let c = doc.data();
+        items.push(c.product);
+        total += c.price;
+      });
+
+      db.collection("orders").add({
+        userId: user.uid,
+        items: items,
+        total: total,
+        status: "pending",
+        time: Date.now()
+      });
+
+      alert("Order created 🔥");
+
+      window.location.href = "checkout.html";
+
+    });
+
+}
 }
 </script>
 
