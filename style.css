@@ -269,3 +269,25 @@ footer p{
 .insta-grid img:hover{
   transform:scale(1.05);
 }
+.checkout-box{
+  width:350px;
+  margin:100px auto;
+  background:#111;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.checkout-box input{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  background:#1d1d1d;
+  border:none;
+  color:white;
+}
+
+.checkout-box button{
+  width:100%;
+  padding:15px;
+}
