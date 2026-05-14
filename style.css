@@ -178,3 +178,48 @@ footer p{
 .checkout{
   width:100%;
 }
+.auth-buttons{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:1000;
+}
+
+.auth-buttons button{
+  padding:10px 20px;
+}
+
+.login-box{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:320px;
+  background:#111;
+  padding:30px;
+  border-radius:20px;
+  transition:0.3s;
+  z-index:2000;
+}
+
+.login-box.active{
+  transform:translate(-50%,-50%) scale(1);
+}
+
+.login-box h2{
+  margin-bottom:20px;
+  text-align:center;
+}
+
+.login-box input{
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+  background:#1d1d1d;
+  border:none;
+  color:white;
+}
+
+.login-box button{
+  width:100%;
+}
