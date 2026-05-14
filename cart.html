@@ -56,11 +56,18 @@ snapshot.forEach(doc => {
 
   total += c.price || 0;
 
-  container.innerHTML += `
-    <div class="order-card">
-      <p>🛍 ${c.product}</p>
-      <p>💰 ${c.price}€</p>
-    </div>
+ container.innerHTML += `
+  <div class="order-card">
+
+    <p>🛍 ${c.product}</p>
+    <p>💰 ${c.price}€</p>
+
+    <button onclick="removeItem('${doc.id}')">
+      Remove
+    </button>
+
+  </div>
+`;
   `;
 });
 
