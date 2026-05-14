@@ -77,7 +77,7 @@ loadProducts();
 
 // -------------------- CART --------------------
 
-function addToCart(product){
+function addToCart(product, price){
 
   const user = auth.currentUser;
 
@@ -89,7 +89,12 @@ function addToCart(product){
   db.collection("carts").add({
     userId: user.uid,
     product: product,
+    price: price,
     time: Date.now()
+  });
+
+  alert("Shtuar në cart 🛒");
+}
   });
 
   alert("Shtuar në cart 🛒");
