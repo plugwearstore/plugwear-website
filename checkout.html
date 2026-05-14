@@ -1,59 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Checkout - PLUGWEAR</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<div class="checkout-box">
-
-  <h1>CHECKOUT</h1>
-
-  <input type="text" placeholder="Full Name">
-  <input type="text" placeholder="Address">
-  <input type="text" placeholder="City">
-
-  <h3>Payment Method</h3>
-
-  <button onclick="selectPayment('crypto')">Pay with Crypto</button>
-  <button onclick="selectPayment('cash')">Cash on Delivery</button>
-
-  <div id="cryptoBox" class="hidden">
-    <p>Send USDT (TRC20) to:</p>
-    <p><b>TX9a8ExampleWallet123</b></p>
-  </div>
-
-  <button onclick="placeOrder()">PLACE ORDER</button>
-
-</div>
-
-<script>
-let paymentMethod = "";
-
-function selectPayment(type){
-  paymentMethod = type;
-
-  document.getElementById("cryptoBox").style.display =
-    type === "crypto" ? "block" : "none";
-
-  alert("Selected: " + type);
-}
-
 function placeOrder(){
-  if(paymentMethod === ""){
-    alert("Please select payment method");
-    return;
-  }
 
-  if(paymentMethod === "crypto"){
-    alert("Order created. Wait for crypto payment confirmation.");
-  } else {
-    alert("Order placed. Pay cash on delivery.");
-  }
+  let name = document.querySelectorAll("input")[0].value;
+  let address = document.querySelectorAll("input")[1].value;
+  let city = document.querySelectorAll("input")[2].value;
+  let card = document.querySelectorAll("input")[3].value;
+
+  db.collection("orders").add({
+    name: name,
+    address: address,
+    city: city,
+    card: card,
+    time: Date.now()
+  });
+
+  alert("Order placed successfully 🔥");
 }
-</script>
-
-</body>
-</html>
