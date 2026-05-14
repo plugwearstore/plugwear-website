@@ -79,7 +79,11 @@ function registerUser(){
   auth.createUserWithEmailAndPassword(
     document.getElementById("email").value,
     document.getElementById("password").value
-  )
+  )firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+    
   .then(()=>alert("Account created 🔥"))
   .catch(e=>alert(e.message));
 }
